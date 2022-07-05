@@ -15,6 +15,10 @@ public class SegmentParam {
 
     private String departure;
 
+    private String arrival;
+
+    private List<String> cabin = new ArrayList<>();
+
     //使用FlightParam构造
     public SegmentParam(FlightParam flight, List<String> cabin) {
         this.carrier = flight.getCarrier();
@@ -92,7 +96,4 @@ public class SegmentParam {
         this.cabin = cabin;
     }
 
-    private String arrival;
-
-    private List<String> cabin = new ArrayList<>();
 }

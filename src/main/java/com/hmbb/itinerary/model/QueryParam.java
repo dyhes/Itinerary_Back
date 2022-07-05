@@ -7,10 +7,10 @@ public class QueryParam {
     private int passenger;
     private int segment;
     private int result;
-    private List<String>departureDatetime=new ArrayList<>();
-    private List<String>departure=new ArrayList<>();
-    private List<String>arrival=new ArrayList<>();
-    private List<String>agent=new ArrayList<>();
+    private List<String> departureDatetime = new ArrayList<>();
+    private List<String> departure = new ArrayList<>();
+    private List<String> arrival = new ArrayList<>();
+    private List<String> agent = new ArrayList<>();
 
     public QueryParam(int passenger, int segment, int result, List<String> departureDatetime, List<String> departure, List<String> arrival, List<String> agent) {
         this.passenger = passenger;

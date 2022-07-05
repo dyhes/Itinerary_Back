@@ -24,4 +24,14 @@ public class TPrice {
 
     @Column(length = 8)
     private String amount;
+
+    public TPrice() {}
+
+    public TPrice(PriceParam priceParam) {
+        this.carrier = priceParam.getCarrier();
+        this.departure = priceParam.getDeparture();
+        this.arrival = priceParam.getArrival();
+        this.cabin = priceParam.getCabin();
+        this.amount = priceParam.getAmount();
+    }
 }

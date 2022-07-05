@@ -27,4 +27,15 @@ public class TFlight {
 
     @Column(length = 3)
     private String arrival;
+
+    public TFlight() {}
+
+    public TFlight(FlightParam flightParam) {
+        this.carrier = flightParam.getCarrier();
+        this.flightNo = flightParam.getFlightNo();
+        this.departureDatetime = flightParam.getDepartureDatetime();
+        this.arrivalDatetime = flightParam.getArrivalDatetime();
+        this.departure = flightParam.getDeparture();
+        this.arrival = flightParam.getArrival();
+    }
 }

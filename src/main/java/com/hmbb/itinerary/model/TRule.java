@@ -30,4 +30,15 @@ public class TRule {
     @Column(length = 3)
     private String surcharge;
 
+    public TRule() {}
+
+    public TRule(RuleParam ruleParam) {
+        this.sequenceNo = ruleParam.getSequenceNo();
+        this.carrier = ruleParam.getCarrier();
+        this.departure = ruleParam.getDeparture();
+        this.arrival = ruleParam.getArrival();
+        this.nextCarrier = ruleParam.getNextCarrier();
+        this.agencies = ruleParam.getAgencies();
+        this.surcharge = ruleParam.getSurcharge();
+    }
 }
