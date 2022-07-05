@@ -3,21 +3,13 @@ package com.hmbb.itinerary.model;
 public class SeatParam {
 
     private String carrier;
-
     private String flightNo;
-
     private String departure;
-
     private String arrival;
-
     private String departureDate;
-
     private String seatF;
-
     private String seatC;
-
     private String seatY;
-
     public String getCarrier() {
         return carrier;
     }
