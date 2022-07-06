@@ -1,22 +1,23 @@
 package com.hmbb.itinerary.service;
 
-import com.hmbb.itinerary.dao.FlightDao;
+import com.hmbb.itinerary.dao.FlightRepository;
 import com.hmbb.itinerary.model.FlightParam;
 import com.hmbb.itinerary.model.PostResponse;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import com.hmbb.itinerary.model.TFlight;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 public class FlightService {
-    private FlightDao flightDao;
+    private final FlightRepository flightRepository;
 
-    @Autowired
-    public FlightService(@Qualifier("real") FlightDao flightDao) {
-        this.flightDao = flightDao;
+    public FlightService(FlightRepository flightRepository) {
+        this.flightRepository = flightRepository;
     }
 
-    public PostResponse updateFlight(FlightParam flightParam){
-        return flightDao.insertFlight(flightParam);
+    public PostResponse insertFlight(FlightParam flightParam){
+        flightRepository.save(new TFlight(flightParam));
+        return new PostResponse(true,"插入成功");
     }
 }

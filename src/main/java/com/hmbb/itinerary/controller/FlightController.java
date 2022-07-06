@@ -17,6 +17,6 @@ public class FlightController {
 
     @PostMapping("/flight")
     public PostResponse updateFlight(@RequestBody FlightParam flightParam){
-        return flightService.updateFlight(flightParam);
+        return flightService.insertFlight(flightParam);
     }
 }

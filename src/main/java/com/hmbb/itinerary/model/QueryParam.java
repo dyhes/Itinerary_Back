@@ -7,7 +7,7 @@ public class QueryParam {
     private int passenger;
     private int segment;
     private int result;
-    private List<String> departureDatetime = new ArrayList<>();
+    private List<String> departureDate = new ArrayList<>();
     private List<String> departure = new ArrayList<>();
     private List<String> arrival = new ArrayList<>();
     private List<String> agent = new ArrayList<>();
@@ -16,7 +16,7 @@ public class QueryParam {
         this.passenger = passenger;
         this.segment = segment;
         this.result = result;
-        this.departureDatetime = departureDatetime;
+        this.departureDate = departureDatetime;
         this.departure = departure;
         this.arrival = arrival;
         this.agent = agent;
@@ -46,12 +46,12 @@ public class QueryParam {
         this.result = result;
     }
 
-    public List<String> getDepartureDatetime() {
-        return departureDatetime;
+    public List<String> getDepartureDate() {
+        return departureDate;
     }
 
-    public void setDepartureDatetime(List<String> departureDatetime) {
-        this.departureDatetime = departureDatetime;
+    public void setDepartureDate(List<String> departureDate) {
+        this.departureDate = departureDate;
     }
 
     public List<String> getDeparture() {
