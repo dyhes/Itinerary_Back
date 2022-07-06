@@ -9,9 +9,9 @@ public class JourneyParam {
 
     private int price;
 
-    private List<Segment> segment = new ArrayList();
+    private List<SegmentParam> segment = new ArrayList();
 
-    public JourneyParam(List<String> agent, int price, List<Segment> segment) {
+    public JourneyParam(List<String> agent, int price, List<SegmentParam> segment) {
         this.agent = agent;
         this.price = price;
         this.segment = segment;
@@ -33,11 +33,11 @@ public class JourneyParam {
         this.price = price;
     }
 
-    public List<Segment> getSegment() {
+    public List<SegmentParam> getSegment() {
         return segment;
     }
 
-    public void setSegment(List<Segment> segment) {
+    public void setSegment(List<SegmentParam> segment) {
         this.segment = segment;
     }
 }

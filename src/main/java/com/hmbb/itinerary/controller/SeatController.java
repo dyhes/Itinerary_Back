@@ -3,13 +3,12 @@ package com.hmbb.itinerary.controller;
 import com.hmbb.itinerary.model.PostResponse;
 import com.hmbb.itinerary.model.SeatParam;
 import com.hmbb.itinerary.service.SeatService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
+@CrossOrigin
 @RestController
 public class SeatController {
     private final SeatService seatService;

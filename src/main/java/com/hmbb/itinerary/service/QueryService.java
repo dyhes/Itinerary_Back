@@ -8,6 +8,7 @@ import com.hmbb.itinerary.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import sun.awt.geom.AreaOp;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +39,17 @@ public class QueryService {
         List<String> arrivals = queryParam.getArrival();
         List<String> agents = queryParam.getAgent();
 
+        /*test front end
+        List<JourneyParam>journey=new ArrayList<>();
+        List<String>agent=new ArrayList<>();
+        agent.add("abc");
+        List<SegmentParam>seg=new ArrayList<>();
+        List<String>cabin=new ArrayList<>();
+        cabin.add("A");
+        cabin.add("B");
+        seg.add(new SegmentParam("CA","0100","20221101","20231101","sha","BJS",cabin));
+        journey.add(new JourneyParam(agent,1234,seg));
+        return new QueryResult(1,journey);*/
 
         List<List<TSeat>> flights = new ArrayList<>();
         //对每段航班进行操作
