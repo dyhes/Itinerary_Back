@@ -46,4 +46,40 @@ public class TSeat {
         this.seatC = seatParam.getSeatC();
         this.seatY = seatParam.getSeatY();
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getCarrier() {
+        return carrier;
+    }
+
+    public String getFlightNo() {
+        return flightNo;
+    }
+
+    public String getDeparture() {
+        return departure;
+    }
+
+    public String getArrival() {
+        return arrival;
+    }
+
+    public String getDepartureDate() {
+        return departureDate;
+    }
+
+    public String getSeatF() {
+        return seatF;
+    }
+
+    public String getSeatC() {
+        return seatC;
+    }
+
+    public String getSeatY() {
+        return seatY;
+    }
 }

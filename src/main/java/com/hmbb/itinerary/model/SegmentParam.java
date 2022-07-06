@@ -30,6 +30,17 @@ public class SegmentParam {
         this.cabin = cabin;
     }
 
+    //使用TSeat构造，注意，这样构造有两个参数是空的
+    public SegmentParam(TSeat tSeat,List<String> cabin){
+        this.carrier = tSeat.getCarrier();
+        this.flightNo = tSeat.getFlightNo();
+/*        this.departureDatetime = tSeat.getDepartureDatetime();
+        this.arrivalDatetime = tSeat.getArrivalDatetime();*/
+        this.departure = tSeat.getDeparture();
+        this.arrival = tSeat.getArrival();
+        this.cabin = cabin;
+    }
+
     public SegmentParam(String carrier, String flightNo, String departureDatetime, String arrivalDatetime, String departure, String arrival, List<String> cabin) {
         this.carrier = carrier;
         this.flightNo = flightNo;
