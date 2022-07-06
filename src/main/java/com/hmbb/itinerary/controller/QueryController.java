@@ -18,6 +18,7 @@ public class QueryController {
 
     @GetMapping("/query")
     public QueryResult query(@RequestBody QueryParam queryParam){
+        queryParam.log();
         return queryService.query(queryParam);
     }
 }

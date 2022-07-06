@@ -7,6 +7,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class QueryService {
     public QueryResult query(QueryParam queryParam) {
-        return null;
+        return ;
     }
 }

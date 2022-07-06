@@ -7,16 +7,24 @@ public class QueryParam {
     private int passenger;
     private int segment;
     private int result;
-    private List<String>departureDatetime=new ArrayList<>();
+    private List<String>departureDate=new ArrayList<>();
     private List<String>departure=new ArrayList<>();
     private List<String>arrival=new ArrayList<>();
     private List<String>agent=new ArrayList<>();
 
-    public QueryParam(int passenger, int segment, int result, List<String> departureDatetime, List<String> departure, List<String> arrival, List<String> agent) {
+    public List<String> getDepartureDate() {
+        return departureDate;
+    }
+
+    public void setDepartureDate(List<String> departureDate) {
+        this.departureDate = departureDate;
+    }
+
+    public QueryParam(int passenger, int segment, int result, List<String> departureDate, List<String> departure, List<String> arrival, List<String> agent) {
         this.passenger = passenger;
         this.segment = segment;
         this.result = result;
-        this.departureDatetime = departureDatetime;
+        this.departureDate = departureDate;
         this.departure = departure;
         this.arrival = arrival;
         this.agent = agent;
@@ -46,14 +54,6 @@ public class QueryParam {
         this.result = result;
     }
 
-    public List<String> getDepartureDatetime() {
-        return departureDatetime;
-    }
-
-    public void setDepartureDatetime(List<String> departureDatetime) {
-        this.departureDatetime = departureDatetime;
-    }
-
     public List<String> getDeparture() {
         return departure;
     }
@@ -78,13 +78,26 @@ public class QueryParam {
         this.agent = agent;
     }
 
+    private void listLog(List<String>list){
+        for(String s:list){
+            System.out.println(s);
+        }
+    }
+
     public void log(){
-        System.out.println("\"passenger\": 2, //旅客数\n" +
-                "    \"segment\": 2, //航段数\n" +
-                "    \"departureDatetime\":[\"20221001\",\"20221005\"], //每个航段出发日期\n" +
-                "    \"departure\":[\"BJS\",\"SHA\"],  //每个航段出发地\n" +
-                "    \"arrival\":[\"SHA\",\"BJS\"],    //每个航段目的地\n" +
-                "    \"agent\":[\"BJS001\",\"SHA001\",\"CAN001\"],   //代理人列表\n" +
-                "    \"result\":3  //返回结果数");
+        System.out.println("passenger");
+        System.out.println(passenger);
+        System.out.println("segment");
+        System.out.println(segment);
+        System.out.println("result");
+        System.out.println(result);
+        System.out.println("departureDate");
+        listLog(departureDate);
+        System.out.println("departure");
+        listLog(departure);
+        System.out.println("arrival");
+        listLog(arrival);
+        System.out.println("agent");
+        listLog(agent);
     }
 }
