@@ -28,6 +28,14 @@ public class TFlight {
     @Column(length = 3)
     private String arrival;
 
+    public String getDepartureDatetime() {
+        return departureDatetime;
+    }
+
+    public String getArrivalDatetime() {
+        return arrivalDatetime;
+    }
+
     public TFlight() {}
 
     public TFlight(FlightParam flightParam) {

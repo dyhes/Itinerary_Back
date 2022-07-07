@@ -25,6 +25,18 @@ public class TPrice {
     @Column(length = 8)
     private String amount;
 
+    public String getRealPrice(){
+        return amount.replace(" ","");
+    }
+
+    public String getCabin() {
+        return cabin;
+    }
+
+    public String getAmount() {
+        return amount;
+    }
+
     public TPrice() {}
 
     public TPrice(PriceParam priceParam) {

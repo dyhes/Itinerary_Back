@@ -8,12 +8,8 @@ import com.hmbb.itinerary.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import sun.awt.geom.AreaOp;
 
-import javax.swing.text.Segment;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 @Service
 @Transactional
@@ -55,16 +51,22 @@ public class QueryService {
         return new QueryResult(1,journey);*/
 
   //      List<List<TSeat>> flights = new ArrayList<>();
-        List<SegmentParam> segmentParams = new ArrayList<>();
+        List<FlightInfo> flightInfos = new ArrayList<>();
         //对每段航班进行操作
         for(int i=0;i<segment;i++){
             //1.挑出来符合日期、出发地和目的地航班，这一步只需要在TSeat表中查询即可完成
             List<TSeat> flight = getAppropriateFlights(departureDates.get(i),departures.get(i),arrivals.get(i));
             //2.对上面的flight进行处理，筛选掉余票不足的并得到每个乘客cabin信息，优先级Y>C>F
-            segmentParams = filterSeat(flight,passenger);
-            //3.得到基础票价
-
-            //4.去除flight中代理商不对的航班，并保存其下一段航班
+            flightInfos = filterSeat(flight,passenger);
+            //释放flight内存
+            flight.clear();
+            flight = null;
+            //3.加入具体起飞、降落时间
+            flightInfos = addDatetime(flightInfos);
+            //4.得到基础票价
+            flightInfos = getBasicPrice(flightInfos);
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+            //下面进行代理商的相关操作
 
 
             //保存该段的航班
@@ -80,9 +82,9 @@ public class QueryService {
         return seatRepository.getAppropriateFlights(departureDate,departure, arrival);
     }
 
-    private List<SegmentParam> filterSeat(List<TSeat> flight,int passenger){
+    private List<FlightInfo> filterSeat(List<TSeat> flight,int passenger){
         List<String> cabin = new ArrayList<>();
-        List<SegmentParam> segmentParams = new ArrayList<>();
+        List<FlightInfo> flightInfos = new ArrayList<>();
         int size = flight.size();
         for(int i = size - 1; i >= 0; i--){
 
@@ -118,9 +120,45 @@ public class QueryService {
                 flight.remove(item);
                 continue;
             }
-
-            segmentParams.add(new SegmentParam(item,cabin));
+            flightInfos.add(new FlightInfo(item,cabin));
         }
-        return segmentParams;
+        return flightInfos;
+    }
+
+    private List<FlightInfo> addDatetime(List<FlightInfo> flightInfos){
+        TFlight tFlight;
+        FlightInfo flightInfo;
+        for(int i=0;i<flightInfos.size();i++){
+            flightInfo = flightInfos.get(i);
+            tFlight = flightRepository.findTFlightByDepartureDatetimeStartingWithAndCarrierAndFlightNoAndDepartureAndArrival(flightInfo.getDepartureDatetime(),flightInfo.getCarrier(),flightInfo.getFlightNo(),flightInfo.getDeparture(),flightInfo.getArrival());
+            flightInfo.setDepartureDatetime(tFlight.getDepartureDatetime());
+            flightInfo.setArrivalDatetime(tFlight.getArrivalDatetime());
+            flightInfos.set(i,flightInfo);
+        }
+        return flightInfos;
+    }
+
+    private List<FlightInfo> getBasicPrice(List<FlightInfo> flightInfos){
+        List<TPrice> tPrices;
+        FlightInfo flightInfo;
+        List<String> cabins;
+        for(int i=0;i<flightInfos.size();i++){
+            flightInfo = flightInfos.get(i);
+            tPrices = priceRepository.findTPricesByCarrierAndDepartureAndArrival(flightInfo.getCarrier(),flightInfo.getDeparture(),flightInfo.getArrival());
+            Map<String, String> map = new HashMap<>();
+            for(TPrice tPrice:tPrices){
+                map.put(tPrice.getCabin(),tPrice.getRealPrice());
+            }
+
+            //设置价格
+            cabins = flightInfo.getCabin();
+            int price=0;
+            for(String cabin:cabins){
+                price += Integer.getInteger(map.get(cabin));
+            }
+            flightInfo.setPrice(price);
+
+        }
+        return flightInfos;
     }
 }
